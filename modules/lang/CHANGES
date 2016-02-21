@@ -1,0 +1,88 @@
+/*
+ * CHANGES  - Change log for the lang files
+ *  $Id: CHANGES,v 1.16 2005/10/14 18:37:55 jpinto Exp $
+ */
+3.5.1
+  ns_set.l
+    Added
+   	NS_SET_INVALID_HOST_X
+3.5.0
+  cs_hopdehop.l
+    Created.
+  bs_assign.l
+    Created.
+  common.l
+    Added PERMISSION_DENIED
+    Added REQUIRES_NUMERIC_X    
+  ns_group.l
+    Added
+	NS_GROUP_X_EXPIRING_X
+	GROUP_SHOW_X_X_X
+	NS_GROUP_CANT_DEFINE_TIME_X
+	NS_GROUP_IS_FULL_X
+	NS_GROUP_SET_MAXUSERS_SET_X_X
+    Changed
+    	NICK_GROUP_SYNTAX - Added [duration] to the ADD syntax
+  ns_info.l
+    Added
+	NICK_VHOST_X
+  ns_register.l
+    Added
+	LINK_EXCHANGE_X_X
+  ns_set.l
+    Added VHOST*
+    Added VLINK*
+    Added URL_NEEDS_HTTP
+  os_hostrule
+    Added HOSTRULE_MANDATORY_TIME
+  os_sendpass
+    Added OS_SENDPASS_NO_EMAIL_X
+3.4.0
+  new file: cs_list.l
+  ms_del.l:
+    Added
+	ALL_MEMOS_DELETED
+  cs_set.l:
+    Added
+	INVALID_MLOCK_PARAMETER
+  ns_group.l
+    Changed
+	NICK_GROUP_SYNTAX - Added [autoumodes] to CREATE syntax
+    Added
+	AUTOMODES_X_UNSET
+	AUTOMODES_X_CHANGED_TO_X
+	DESC_X_UNSET
+	DESC_X_CHANGED_TO_X
+	SET_INVALID_OPTION_X
+  ns_info.l
+    Added
+        NICK_USERHOST
+3.3.0
+  new file: ns_blacklist.l
+  new file: ns_getpass.l
+  os_global.l:
+    Added
+	GLOBALMSG_SUMMARY
+	GLOBALMSG_HELP
+  cs_info.l:
+    Added
+	CHAN_MLOCK_X
+  nscommon.l:
+    Added
+	FORBIDDEN_EMAIL
+	NICK_X_NOT_AUTHENTICATED
+  nickserv.l
+    Added 
+	NICK_PASSWORD_EXPIRED
+  cs_set.l
+    Added 
+	MLOCK_CHANGED_TO_X
+    	MLOCK_UNSET
+    	INVALID_MLOCK_LETTER
+    	INVALID_MLOCK_CONFLICT
+    Changed
+	HELP_SET, Added SECUREOPS to the options list
+	HELP_SET, Added FORBIDDEN  to the options list
+  cs_akick.l
+    Changed
+	AKICK_LIST_X_X to AKICK_LIST_X_X_X

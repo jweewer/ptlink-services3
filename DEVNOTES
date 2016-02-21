@@ -1,0 +1,29 @@
+**********************************************************************
+* PTlink IRC Services is (C) Copyright PTlink IRC Software 1999-2005 *
+*                  http://software.pt-link.net                       *
+* This program is distributed under GNU Public License               *
+* Please read the file COPYING for copyright information.            *
+**********************************************************************
+---------------------------------------
+ PTlink IRC Services 3 - Development Notes
+---------------------------------------
+
+ *  $Id: DEVNOTES,v 1.1.1.1 2005/08/27 15:43:26 jpinto Exp $
+
+* Motivation *
+After some years with using and expanding ircservices4 legacy I have learned
+that I don't like most of the technical options which were taken on its
+development so I did not found it suitable for the major changes we had in
+mind.
+
+* Goals *
+The main goals for this new project, in a development point of view, were 
+easy development by moving ircd related functions/handling to an auxiliary
+library (libircservice) and data integration for web services (achieved by
+using MySQL for the db).
+
+* Limitations *
+There has been some care for efficiency on resource usage but
+that wasn't a major concern. PTlink IRC Services 3 were not planned to be
+used by a large network, it's usability is strongly dependent on the MySQL
+service performance.

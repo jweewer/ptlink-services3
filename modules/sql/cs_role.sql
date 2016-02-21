@@ -1,0 +1,43 @@
+# $Id: cs_role.sql,v 1.3 2005/10/04 16:31:48 jpinto Exp $
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS cs_role;
+CREATE TABLE cs_role(
+  rid INT UNSIGNED NOT NULL auto_increment,
+  scid INT UNSIGNED NOT NULL,
+  name varchar(16) NOT NULL,
+  master_rid INT UNSIGNED NULL,	# master role id
+  actions int(5),
+  perms int(5),
+  PRIMARY KEY (rid),
+  UNIQUE KEY(scid, name),
+  INDEX(master_rid),
+  CONSTRAINT FK_CSR1 FOREIGN KEY (scid) REFERENCES chanserv (scid) 
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT FK_CSR2 FOREIGN KEY (master_rid) REFERENCES cs_role (rid) 
+    ON DELETE SET NULL ON UPDATE CASCADE
+) Type = InnoDB;
+
+DROP TABLE IF EXISTS cs_role_users;
+CREATE TABLE cs_role_users(
+  rid INT UNSIGNED NOT NULL,
+  snid INT UNSIGNED NOT NULL,
+  who  INT UNSIGNED NULL,
+  scid INT UNSIGNED NOT NULL,
+  message varchar(255),
+  flags INT NOT NULL,
+  PRIMARY KEY(scid, snid),
+  UNIQUE KEY (snid, rid),
+  INDEX(who),
+  INDEX(rid),
+  CONSTRAINT FK_CSRU1 FOREIGN KEY (rid) REFERENCES cs_role (rid)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT FK_CSRU2 FOREIGN KEY (snid) REFERENCES nickserv (snid) 
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT FK_CSRU3 FOREIGN KEY (who) REFERENCES nickserv (snid)
+    ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT FK_CSRU4 FOREIGN KEY (scid) REFERENCES chanserv (scid) 
+    ON DELETE CASCADE ON UPDATE CASCADE
+) Type = InnoDB;
+
+SET FOREIGN_KEY_CHECKS = 1;

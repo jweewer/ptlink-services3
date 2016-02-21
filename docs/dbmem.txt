@@ -1,0 +1,26 @@
+static DBMem* dbm;
+
+/***** Initialization *****/
+/* initalize structure pre-alocating 128 units */
+dbm = dbmem_init ("table", 128);
+if(dbmem_load(dbm) < 0) 
+  return -1; /* unable to load data */
+  
+  
+/**** Adding a row ****/
+char* d_row[]; /* field values */
+d_row[0] = value;
+if(dbmem_insert(dbm, d_row) < 0)
+  return -1; /* error inserting data */
+  
+/**** Finding a value ****/
+char* d_row[]; /* field values */
+row = dbmem_find_exact(dbm, key_value, key_index);
+if(row == NULL)
+  return -1; /* value not found */
+  
+/**** Deleting a value ****/
+/* first locate the item to delete with dbmem_find_exact() */
+if(dbmem_delete_current(dbm) < 0)
+  return -1; /* error deleting row */
+

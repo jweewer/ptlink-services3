@@ -1,0 +1,25 @@
+******************************************************************
+*                  http://software.pt-link.net                   *
+******************************************************************
+Supported ircds:
+  PTLINK6
+
+There is no system install option for now.
+You will need some developer skills to use the library on your programs.
+The easiest way to use and test the library is:
+COMPILE IT:
+	./configure
+	make
+SETUP THE SAMPLES
+	edit samples/setup.h
+	make samples
+
+To build some documentation you will need doxygen:
+	www.doxygen.org
+After installing it you can build the documentation, from the source dir
+execute: doxygen
+The documentation will be generated to the doc directory
+You can browse it with your favorite brower at:
+doc/html/index.html
+
+For license please read the file LICENSE

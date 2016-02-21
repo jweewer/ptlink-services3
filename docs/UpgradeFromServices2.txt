@@ -1,0 +1,30 @@
+**********************************************************************
+* PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2005 *
+*                     http://software.pt-link.net                    *
+* This program is distributed under GNU Public License               *
+* Please read the file COPYING for copyright information.            *
+**********************************************************************  
+
+  Description: Upgrading from PTlink Services 2
+
+  $Id: UpgradeFromServices2.txt,v 1.1.1.1 2005/08/27 15:43:49 jpinto Exp $
+
+1) Requirements
+.1  PTlink IRC Services 3 data is saved directly on a MySQL DB so you will
+    need a mysql DB .
+.1  Plain text passwords are not allowed on ircsvs3, if you don't use md5
+    encrypted password you must do so by editing services/etc/services.conf 
+    and changint EncryptMethod to 3 .
+.2  Services2 need to be compiled with mysql support
+    check the doc at MySQL/INSTALL from services2 for details on this.   
+    Make sure you are installing PTlink.Services2.26-eol.1 
+    and you recreate the db structure with services -i .
+
+You can export the services2 data to mysql without needing to run services2
+connected to an ircd, just use:
+
+	~/services/bin/listnicks -c  	# (This will export the nick data)
+	~/services/bin/listchans -c     # (This will export the chan data)
+
+Ok, you can just install ircsvs3 using the same database configuration, the
+existing data will be saved.

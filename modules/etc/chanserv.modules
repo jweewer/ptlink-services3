@@ -1,0 +1,22 @@
+# Default chanserv.modules
+# Chanserv modules we want to load
+# module_filename:module_dconf_filename:sub_modules_filenam
+cs_role
+cs_ajoin
+cs_akick
+cs_clear
+cs_drop
+cs_help
+cs_hopdehop
+cs_kick
+cs_lastreg
+cs_list
+cs_register
+cs_info
+cs_invite
+cs_opdeop
+cs_set
+cs_show
+cs_suspend
+cs_unban
+cs_voicedevoice

@@ -1,0 +1,9 @@
+Check List
+	Profile: Adding a new channel option
+
+1. Add a new flag and the standard macros on modules/chanserv.h
+2. Add the new option/flag to the options_mask on modules/cs_info.c
+3. Add the new option to the SET_HELP on modules/lang/cs_set.l
+4. Add the new option to cs_set on modules/cs_set.c
+5. Add the option code where applicable
+

@@ -1,0 +1,40 @@
+#**********************************************************************
+#* PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2005 *
+#*                  http://software.pt-link.net                       *
+#* This program is distributed under GNU Public License               *
+#* Please read the file COPYING for copyright information.            *
+#**********************************************************************
+#
+#  Description: PTlink IRC Services etc Makefile.in
+#
+#  $Id: Makefile.in,v 1.4 2005/09/28 22:34:16 jpinto Exp $
+#
+
+prefix          = @prefix@
+sysconfdir	= @sysconfdir@
+INSTALL         = @INSTALL@
+INSTALL_DATA    = @INSTALL_DATA@
+RM		= @RM@
+
+CONFS		= \
+		botserv.modules \
+		chanserv.modules \
+		nickserv.modules \
+		memoserv.modules \
+		operserv.modules
+
+build:
+	@echo Nothing to build on etc
+install:
+	@for i in $(CONFS); do \
+		if ! test -f $(sysconfdir)/$$i; then \
+			$(INSTALL_DATA) $$i $(sysconfdir); \
+		fi; \
+        done
+
+clean:
+	${RM} -f *.o *.exe *~ core.* ${PROG}
+
+distclean: clean
+	${RM} -f Makefile version.c.last
+ 

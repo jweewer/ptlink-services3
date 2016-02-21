@@ -1,0 +1,37 @@
+#!/usr/bin/expect -f
+# $Id: btest.exp,v 1.1 2005/10/01 15:29:37 jpinto Exp $
+#
+# PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2005 
+#
+# This script does an automated testing of services
+#
+# You will need to register(and authenticate) a nick
+# and add the following lines(uncommented) into a file .svs3test 
+# in your home dir :
+#set nick "test_nick"
+#set pass "passtest1" 
+#set chan "#testchan"
+#set security "SvUgPatlua"
+
+exp_version -exit 5.0
+source login.exp
+
+send_user "*** Testing nick change recognition\n"
+send "NICK abzKLO\n"
+expect timeout timedout "NICK :abzKLO"
+send "NICK $nick\n"
+expect timeout timedout "MODE $nick*+r"
+send_user "*** Testing password change\n"
+send "NICKSERV SET PASSWORD abct3ste\n"
+expect timeout timedout "has been changed to*abct3ste"
+send "NICKSERV SET PASSWORD $pass\n"
+expect timeout timedout "has been changed to*$pass"
+send_user "*** Testing channel registration\n"
+send "JOIN $chan\n"
+expect timeout timedout "you are the first user on*$chan"
+send "CHANSERV REGISTER $chan this is a nice channel\n"
+expect timeout timedout "$chan*was successfully*was created on*$chan*$nick* was added with role"
+send_user "*** Testing channel drop\n"
+send "CHANSERV DROP $chan $security\n"
+expect timeout timedout "$chan*has been dropped"
+send_user "\n*** Tests completed ***\n"

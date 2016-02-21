@@ -1,0 +1,17 @@
+**********************************************************************
+* PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2005 *
+*                  http://software.pt-link.net                       *
+* This program is distributed under GNU Public License               *
+* Please read the file COPYING for copyright information.            *
+**********************************************************************
+
+  Description: Some guidelines to edit lang files
+
+  $Id: README,v 1.1.1.1 2005/08/27 15:44:50 jpinto Exp $
+
+- Just edit the .l files (plain text files), the .lh will be regenerated
+- The limit for the strings is 80 columns .
+- Try to use the same style you see on the english strings.
+- You can mark bold with "\B" (repeat the char to close the bold)
+- You can mark bold with "\U" (repeat the char to close the bold)
+- Keep items with the same language order !!!

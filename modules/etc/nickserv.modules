@@ -1,0 +1,23 @@
+# Default nickserv.modules
+# Leave ns_group on the top, the other modules may depend on it
+# Comment modules that you want to disable instead of removing them
+# in case you want to readded them later the order they are lodade 
+# is important and must be kept.
+ns_group
+ns_auth
+ns_blist
+ns_drop
+ns_getpass
+ns_help
+ns_suspend
+ns_identify
+ns_info
+ns_list
+ns_last
+ns_login
+ns_photo
+ns_register
+ns_set
+# Enable if you want to export data to a Joomla CMS
+# Please note that it will overwrite your Joomla users data 
+# joomla_export

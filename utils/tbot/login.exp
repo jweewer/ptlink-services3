@@ -1,0 +1,33 @@
+# this part will setup the initial session and identify
+source $env(HOME)/.svs3test
+
+proc timedout {} {
+	global expect_out
+        send_user "$expect_out(buffer)\n"
+	send_user "Timed out ? Bug ???\n"
+	exit 1
+}
+
+set timeout 20
+
+set env(TERM) vt100	;# actual value doesn't matter, just has to be set
+
+spawn telnet localhost 6667
+expect timeout timedout "NOTICE AUTH"
+send "USER abc abc abc abc\n"
+send "NICK $nick\n"
+expect timeout timedout "End of /MOTD"
+# Try to identify nick
+send_user "*** Testing nick login\n"
+send "NICKSERV LOGIN $nick $pass\n"
+expect {
+  "MODE*"  { 
+   exp_continue
+  } "Services is currently down" { 
+    send_user "!!! Services are down !!!\n"
+    exit 1
+  } "This nick is not registered" { 
+    send_user "!!! Nick is not registered !!!\n"
+    exit 1
+  }
+}

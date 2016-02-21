@@ -1,0 +1,68 @@
+Major changes on the new services version:
+
+Nick security
+-------------
+The nick and channel registration security was extended with the introduction 
+of a nick security code, this code is required for any ownership transfer
+operation like setting a new email or changing a channel founder.
+If you don't have a security code because your nick was already registered
+just set a new email with:
+  /NickServ SET EMAIL your_email
+If you whish to have your email hidden from nickserv information requests
+just type:
+  /NickServ SET HIDEEMAIL on
+
+Setting the auto join channel list
+----------------------------------
+The auto join list is now defined with a single command:
+  /NickServ SET AUTOJOIN #Chan1,#Chan2...
+Note: Do not use spaces between channel names.
+
+Channel ownership
+-----------------
+The channel password was removed. Only the channel founder is recognized as
+the channel owner, to drop or transfer a channel the nick security code is
+required.
+
+Channel Roles (Old access list)
+-------------------------------
+The channel access list was replaced by the roles list, a role defines the
+group of actions and privileges assigned to the role member's. 
+An user can have a single role on a given channel.
+By default 4 roles are created after the channel registration: admin,
+operator, voice and akick. 
+To view the list of roles available on a channel you must use:
+  /ChanServ ROLE #Chan VIEW
+The default "admin" role is defined with actions to send a notice (when
+defined) and set chanmode +a when he joins a channel.
+The "operator" role is similar but sets chanmode +o on join.
+On the chanserv role view you can also see between "[]" the master role of a
+given role. The master role has privileges to add/remove members to the
+mastered role, for the "operatpr" role case the master role is "admin" .
+To add a nick to a channel role you use the command:
+  /ChanServ ROLE #Chan ADD role nick message
+For example to add nick "Lamego" with "Operator" on "#Portugal" .
+  /ChanServ ROLE #Portugal ADD Operator Lamego Hello operator !
+The message is an optional parameter, if defined will be sent as a notice
+to the channel when the nick joins.
+Role masters can change/set a role user message with the setmsg command:
+  //ChanServ ROLE #Chan SETMSG nick message
+
+More about roles
+----------------
+The default roles are ok for most of the users however roles allow to
+define more customized roles which can make more sense with the channel.
+Let's imagine a channel #Zoo.
+You can create a role Lion:
+  /ChanServ ROLE #Zoo CREATE Lion admin aop,msg:opdeop
+A Lion user is masted by admin and will set +o and send a notice when the
+user joins the channel. It will also be able to use the chanserv op/deop
+commands.
+Then you can create a monkey role:
+  /ChanServ ROLE #Zoo CREATE Monkey Lion avoice:invite
+Monkeys will get +v on join and can use chanserv invite.
+Now lets add nick Bob and nick Sam to the roles.
+  /ChanServ ROLE #Zoo Add Lion Bob Here is the king !
+  /ChanServ ROLE #Zoo Add Monkey Sam Uhhuuuuuhhh Ahhhhhhhhh...
+
+

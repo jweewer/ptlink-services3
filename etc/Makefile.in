@@ -1,0 +1,66 @@
+#**********************************************************************
+#* PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2005 *
+#*                  http://software.pt-link.net                       *
+#* This program is distributed under GNU Public License               *
+#* Please read the file COPYING for copyright information.            *
+#**********************************************************************
+#
+#  Desc: PTlink IRC Services etc Makefile.in
+#
+#  $Id: Makefile.in,v 1.2 2005/09/28 22:34:16 jpinto Exp $
+#
+
+prefix          = @prefix@
+sysconfdir	= @sysconfdir@
+INSTALL         = @INSTALL@
+INSTALL_DATA    = @INSTALL_DATA@
+RM		= @RM@
+
+CONFS		= \
+		ircsvs.conf \
+		ircsvs.modules
+MAILS		= \
+		setemail.en_us \
+		setemail.pt \
+		setemail.pt_br \
+		setemail.nl \
+		setemail.de \
+		welcome.en_us \
+		welcome.pt \
+		welcome.pt_br \
+		welcome.nl \
+		welcome.de
+
+build:
+	@echo Nothing to build on etc
+install-mkdirs:
+	-@if test ! -d $(prefix); then \
+		echo "mkdir $(prefix)"; \
+		mkdir $(prefix); \
+	fi
+	-@if test ! -d $(exec_prefix); then \
+		echo "mkdir $(sysconfdir_prefix)"; \
+		mkdir $(exec_prefix); \
+	fi
+	-@if test ! -d $(sysconfdir)/mails; then \
+		echo "mkdir $(sysconfdir)/mails"; \
+		mkdir $(sysconfdir)/mails; \
+	fi
+install: install-mkdirs
+	@for i in $(CONFS); do \
+		if ! test -f $(sysconfdir)/$$i; then \
+			$(INSTALL_DATA) $$i $(sysconfdir); \
+		fi; \
+        done
+	@for i in $(MAILS); do \
+		if ! test -f $(sysconfdir)/mails/$$i; then \
+			$(INSTALL_DATA) mails/$$i $(sysconfdir)/mails; \
+		fi; \
+        done
+
+clean:
+	${RM} -f *.o *.exe *~ core.* ${PROG}
+
+distclean: clean
+	${RM} -f Makefile version.c.last
+ 

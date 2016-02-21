@@ -1,0 +1,75 @@
+**********************************************************************
+* PTlink IRC Services is (C) Copyright PTlink IRC Software 1999-2005 *
+*                  http://software.pt-link.net                       *
+* This program is distributed under GNU Public License               *
+* Please read the file COPYING for copyright information.            *
+**********************************************************************
+
+  Desc: Install instructions
+
+  $Id: INSTALL,v 1.5 2005/10/16 17:31:32 jpinto Exp $
+
+************************************************************************
+*** Requirements
+
+-- MySQL
+You need a MySQL database to store services data. The software was
+developed and tested with MySQL 4.0.23 .
+You will need the mysql development libraries installed on the system.  
+
+--- IRCd
+The only supported IRCd version is the PTlink IRCd available from:
+	http://software.pt-link.net
+
+*** Install instructions
+Run the configure script with:
+ ./configure --prefix=install_path
+
+Build with "make"
+
+Install with "make install"
+
+*** Configuration
+Edit ~/ircsvs/etc/ircsvs.conf and put your mysql db configuration.
+
+*** Database tables creation
+Just run install_dir/bin/ircsvs with the default configuration, 
+If services can't connect to the mysql db they will ask you for the MySQL root
+password to create the db and the user if required.
+You don't need to manually create the db tables, the modules will create their
+own tables when the modules are loaded for the first time.
+
+Once the module tables are created you must setup all the required
+configuration items using ircsvs with the "conf" command:
+  ./ircsvs conf SET irc.ServerName services.ptlink.net
+  ./ircsvs conf SET irc.ServerDesc PTlink Services 3
+  ./ircsvs conf SET irc.ServerPass servpass
+  ./ircsvs conf SET irc.RemoteServer 127.0.0.1
+  ./ircsvs conf SET irc.RemotePort 6667
+To list all the other options:
+  ircsvs conf list
+Or just the unconfigured(default) options:
+  ircsvs conf list * missing
+
+*** For more details about configuration read the file CONFIG
+
+*** Setting the first root nick
+After defining all the options you need you must set an inital Root nick to
+be able to use the NickServ GROUP ADD command , do it:
+  ircsvs conf SET ns_group ROOT nick
+Please note that on your first services run you must define the Root nick on
+the db:
+  /NickServ GROUP ADD ROOT nick
+
+
+
+### For the web interface install instructions read www/INSTALL
+
+### Before making questions make sure you read the FAQ !!!!!!!!
+
+### If you need support
+Try the forum:
+	http://software.pt-link.net/index.php?option=com_simpleboard&Itemid=46
+Or IRC:
+	/server irc.pt-link.net:6667
+	/join #PTC

@@ -1,0 +1,98 @@
+#*****************************************************************
+#* libircservice is (C) CopyRight PTlink IRC Software 1999-2004  *
+#*                http://software.pt-link.net                    *
+#* This program is distributed under GNU Public License          *
+#* Please read the file COPYING for copyright information.       *
+#*****************************************************************
+#
+#  Description: libircservice src Makefile.in
+#
+#  $Id: Makefile.in,v 1.1.1.1 2005/08/27 15:44:17 jpinto Exp $
+#
+
+CC		= @CC@
+INSTALL		= @INSTALL@
+INSTALL_BIN	= @INSTALL_PROGRAM@
+INSTALL_DATA	= @INSTALL_DATA@
+INSTALL_SUID	= @INSTALL_PROGRAM@ -o root -m 4755
+RM		= @RM@
+CFLAGS		= @CFLAGS@
+LDFLAGS   	= @LDFLAGS@
+MKDEP		= @MKDEP@
+MV		= @MV@
+RM		= @RM@
+AR		= @AR@
+RANLIB		= @RANLIB@
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+bindir		= @bindir@
+libexecdir	= @libexecdir@
+sysconfdir	= @sysconfdir@
+localstatedir	= @localstatedir@
+
+INCLUDES	= -I../include -I.
+CPPFLAGS	= ${INCLUDES} @CPPFLAGS@
+ 
+default:	all
+
+BASE_SRCS = 	\
+		channel.c \
+		cmode.c \
+		event.c \
+		hash.c \
+		initconn.c \
+		ircdio.c \
+		irc_parse.c \
+		server.c \
+		match.c \
+		raw.c \
+		send.c \
+		sockutil.c \
+		timer.c \
+		umode.c \
+		user.c 
+
+SRCS = ${BASE_SRCS} ${SELECT_SRC}
+
+OBJS = ${SRCS:.c=.o}
+
+all: libircservice.a
+
+build: all
+
+libircservice.a: ${OBJS}
+		rm -f $@
+		${AR} cqv $@ ${OBJS}
+		${RANLIB} $@
+
+# this is really the default rule for c files
+.c.o:
+	${CC} ${CPPFLAGS} ${CFLAGS} -c $<
+
+.PHONY: depend clean distclean
+
+../include/m_commands.h:
+	@./m_commands.sh
+
+install: 
+
+depend:
+	@${MKDEP} ${CPPFLAGS} ${BASE_SRCS} ${EXTRA_SRCS} > .depend.tmp
+	@sed -e '/^# DO NOT DELETE THIS LINE/,$$d' <Makefile >Makefile.depend
+	@echo '# DO NOT DELETE THIS LINE!!!' >>Makefile.depend
+	@echo '# make depend needs it.' >>Makefile.depend
+	@cat .depend.tmp >>Makefile.depend
+	@mv Makefile.depend Makefile
+	@rm -f .depend.tmp
+
+clean:
+	${RM} -f *.o *.exe *~ libircservice.a
+
+lint:
+
+distclean: clean
+	${RM} -f Makefile version.c.last
+
+# DO NOT DELETE THIS LINE!!!
+# make depend needs it.

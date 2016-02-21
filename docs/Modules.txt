@@ -1,0 +1,53 @@
+**********************************************************************
+PTlink IRC Services 3 - Modules Specification
+**********************************************************************
+
+/* module information */
+mod_info = {
+  char *name;           /* module name */
+  char *version;        /* version */
+  char *parent;         /* parent module name */
+  char *desc;           /* description */
+  void *mhandle;        /* module handle (will be set on load) */
+  Module_cmd *cmds;     /* list of module commands (to bind commands to client) */
+}
+
+/* module dependency */
+mod_dep = {
+  char *name;		/* symbol name */
+  void* ptr;		/* data function pointer */
+}
+
+**********************************************************************
+PTlink IRC Services 3 - Module events functions
+**********************************************************************
+
+/* returns an event handler for a given event name */
+int mod_event_handle(char *name);
+returns:	-1 event not found
+		>=0 event handle
+
+/* register an event name (for event generators) */
+int mod_register_event(char *name)
+returns:	-2 event already exists
+		-1 event handler table is full
+		>=0 event handle created
+
+/* unregister an event */
+int mod_unregister_event(int evhandle);
+returns:	-1 event in use (associated actions list is not null)
+		0 event sucessfully unregistered
+
+/*  do event (call event actions for event handle) */
+int mod_do_event(int evhandle, void *data);
+returns:	count of actions called
+
+/* adds an action associated with an event */
+int mod_add_event_action(int evhandle, void *function);
+returns:	
+		-2 event not found
+		>0 count of actions for event
+
+/* dels an action associated with an event */
+int mod_del_event_action(int evhandle, void *function);
+

@@ -1,0 +1,18 @@
+**********************************************************************
+* PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2005 *
+*                  http://software.pt-link.net                       *
+* This program is distributed under GNU Public License               *
+* Please read the file COPYING for copyright information.            *
+**********************************************************************
+
+  Description: Services Web Interface Install documentation
+
+  $Id: INSTALL,v 1.1.1.1 2005/08/27 15:43:48 jpinto Exp $
+
+This is the web interface for PTlink IRC Services 3
+---------------------------------------------------
+
+You don't need to create the db, all the tables will be created by services.
+Copy includes/sample-config.inc.php to includes/config.inc.php and edit it.
+
+

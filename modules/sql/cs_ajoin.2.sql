@@ -1,0 +1,9 @@
+# $Id: cs_ajoin.2.sql,v 1.2 2005/10/29 11:22:29 jpinto Exp $
+
+ALTER TABLE cs_ajoin
+  ADD COLUMN order_id INT(2) NOT NULL default '0' AFTER scid,
+  ADD INDEX(scid),
+  ADD CONSTRAINT FK_CSA1 FOREIGN KEY (snid) REFERENCES nickserv (snid)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT FK_CSA2 FOREIGN KEY (scid) REFERENCES chanserv (scid)
+    ON DELETE CASCADE ON UPDATE CASCADE;

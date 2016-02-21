@@ -1,0 +1,64 @@
+**********************************************************************
+* PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2005 *
+*                     http://software.pt-link.net                    *
+* This program is distributed under GNU Public License               *
+* Please read the file COPYING for copyright information.            *
+**********************************************************************  
+
+  Description: Events list
+
+  $Id: event_list.txt,v 1.4 2005/10/10 16:52:07 jpinto Exp $
+
+
+--------------------------------------------------------------
+Name: e_chan_delete
+When: A channel will be deleted
+Par1: int* scid
+Par2: NULL
+--------------------------------------------------------------
+Name: e_nick_delete
+When: A nick will be deleted
+Par1: int* snid
+Par2: int* flag (0 = expired, 1 = deleted)
+--------------------------------------------------------------
+Name: e_modules_loaded
+When: All modules where loaded
+Par1: NULL
+Par2: NULL
+--------------------------------------------------------------
+Name: e_nick_identify
+When: A nick is identified
+Par1: IRC_User* user
+Par2: u_int32_t snid
+--------------------------------------------------------------
+Name: e_nick_recognize
+When: A identified nick was recognized: has umode (+r), or changed to the
+previously used nick.
+Par1: IRC_User* user
+Par2: u_int32_t snid
+--------------------------------------------------------------
+Name: e_nick_info
+When: A info command is called for a nick
+Par1: IRC_User* user
+Par2: u_int32_t snid
+--------------------------------------------------------------
+Name: e_nick_register
+When: A nick is registered
+Par1: IRC_User* user
+Par2: u_int32_t* snid
+--------------------------------------------------------------
+Name: e_chan_register
+When: A channel is registered
+Par1: IRC_User*
+Par2: IRC_ChanRecord*
+--------------------------------------------------------------
+Name: e_regchan_join,
+When: An user joined a registered channel
+Par1: ChanRecord*
+Par2: IRC_ChanNode*
+--------------------------------------------------------------
+
+### Bot events
+Name: e_bot_introduce
+When: A bot is introduced on the network
+Par1: u_int32_t* bid

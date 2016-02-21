@@ -1,0 +1,85 @@
+#*****************************************************************
+#* libircservice is (C) CopyRight PTlink IRC Software 1999-2004  *
+#*                http://software.pt-link.net                    *
+#* This program is distributed under GNU Public License          *
+#* Please read the file COPYING for copyright information.       *
+#*****************************************************************
+#
+#  Description: libircservice samples Makefile.in
+#
+#  $Id: Makefile.in,v 1.1.1.1 2005/08/27 15:44:19 jpinto Exp $
+#
+
+CC		= @CC@
+INSTALL		= @INSTALL@
+INSTALL_BIN	= @INSTALL_PROGRAM@
+INSTALL_DATA	= @INSTALL_DATA@
+INSTALL_SUID	= @INSTALL_PROGRAM@ -ok root -m 4755
+RM		= @RM@
+LEX		= @LEX@
+LEXLIB		= @LEXLIB@
+CFLAGS		= @CFLAGS@
+LDFLAGS   	= @LDFLAGS@
+MKDEP		= @MKDEP@
+MV		= @MV@
+RM		= @RM@
+YACC		= @YACC@
+AR		= @AR@
+RANLIB		= @RANLIB@
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+bindir		= @bindir@
+libexecdir	= @libexecdir@
+sysconfdir	= @sysconfdir@
+localstatedir	= @localstatedir@
+SVSLIB		= -L../src -lircservice
+INCLUDES	= -I../include -I.
+CPPFLAGS	= ${INCLUDES} @CPPFLAGS@
+ 
+default:	all
+
+BASE_SRCS = 	\
+		changuard.c \
+		fortune.c \
+		infoserv.c \
+		listchans.c \
+		listnicks.c \
+		watchdog.c \
+		tldstats.c
+
+SRCS = ${BASE_SRCS} ${SELECT_SRC}
+
+OBJS = ${SRCS:.c=}
+
+all: setup.h ../src/libircservice.a ${OBJS}
+
+build: ${OBJS}
+
+
+# this is really the default rule for c files
+.c:
+	${CC} ${CPPFLAGS} ${CFLAGS}  $< ${SVSLIB} -o $@
+
+.PHONY: depend clean distclean
+
+install: 
+
+depend:
+	@${MKDEP} ${CPPFLAGS}  ${BASE_SRCS} ${EXTRA_SRCS} > .depend.tmp
+	@sed -e '/^# DO NOT DELETE THIS LINE/,$$d' <Makefile >Makefile.depend
+	@echo '# DO NOT DELETE THIS LINE!!!' >>Makefile.depend
+	@echo '# make depend needs it.' >>Makefile.depend
+	@cat .depend.tmp >>Makefile.depend
+	@mv Makefile.depend Makefile
+	@rm -f .depend.tmp
+
+clean:
+	${RM} -f *.o *.exe ${OBJS}
+
+lint:
+
+distclean: clean
+	${RM} -f *~ Makefile version.c.last
+
+# DO NOT DELETE THIS LINE!!!
+# make depend needs it.

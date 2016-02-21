@@ -1,0 +1,45 @@
+=== Server Events ===============================
+ET_NEW_SERVER
+  When: A new server is introduced
+  Parameteres:
+	IRC_Server* nserver: new server
+	IRC_Server* from: from server
+=== User Events =================================
+ET_NEW_USER
+  When: A new user is introduced
+
+ET_NICK_CHANGE
+  When: A nick change occurs
+  Parameters:
+	IRC_User* user: User after nick change
+	char* nick: old nick
+ET_QUIT
+  When: An user quits
+  Parameters:
+	IRC_User* user: User before quit
+	char* reason: Quit reason
+ET_KILL
+  When: An user is killed
+  Parameteres:
+	IRC_User* target: kill target
+	IRC_User* source: kill source
+=== Channel Events ==============================
+ET_CHAN_JOIN
+  When: A user joins a channel
+  Parameters:
+	IRC_Chan* chan: Channel
+	IRC_ChanNode* cn: Channel node
+ET_CHAN_PART
+ When: A user parts a channel
+  Parameters:
+  	IRC_Chan* chan: Channel the user is parting from
+	IRC_User* user: User parting from the channel
+ET_CHAN_TOPIC
+ When: A topic is changed on a channel
+  Parameters:
+  	IRC_Chan* chan: Channel the topic was changed at
+	IRC_User* user: User doing the topic change
+
+=== Misc. Events ================================
+ET_LOOP
+  When: At every ircd I/O loop cycle

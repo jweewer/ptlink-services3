@@ -1,0 +1,16 @@
+# Default operserv.modules
+os_global
+os_help
+os_kick
+os_mode
+os_module
+os_quote
+os_raw
+os_shutdown
+os_sline
+os_sendpass
+os_stats
+os_sysstats
+os_sysuptime
+os_uevent
+sessionlimit

@@ -1,0 +1,101 @@
+#**********************************************************************
+#* PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2005 *
+#*                  http://software.pt-link.net                       *
+#* This program is distributed under GNU Public License               *
+#* Please read the file COPYING for copyright information.            *
+#**********************************************************************
+#
+#  Description: PTlink IRC Services main Makefile.in
+#
+#  $Id: Makefile.in,v 1.2 2005/09/28 22:34:16 jpinto Exp $
+#
+
+RM=@RM@
+prefix		= @prefix@
+
+# Default CFLAGS
+# CFLAGS = -g -O2 -DNDEBUG
+CFLAGS		= -g
+# Developers CFLAGS
+#CFLAGS= -g -O2 -Wunused -Wall -ggdb -pedantic -Wshadow -Wmissing-declarations
+
+# Default make flags - you may want to uncomment this on a multicpu machine
+#MFLAGS = -j 4
+
+#
+# For developers
+#CFLAGS= -g -O2 -Wall
+
+# You may need to define the FD_SETSIZE in order to overrule
+# the system one.
+#CFLAGS= -DNDEBUG -g -O2 -D"FD_SETSIZE=1024"
+SHELL=/bin/sh
+SUBDIRS=libircservice src etc modules utils
+CLEANDIRS = ${SUBDIRS}
+MAKE = make ${MFLAGS} 
+
+all:	build
+
+autoconf: autoconf/configure.in
+	autoconf autoconf/configure.in > configure
+	autoheader autoconf/configure.in
+	${RM} -f config.cache
+
+import-stdb: src/import-stdb.c
+	@cd src ; ${MAKE} import-stdb
+
+build:
+	-@if [ ! -f include/setup.h ] ; then \
+		echo "Hmm...doesn't look like you've run configure..."; \
+		echo "Doing so now."; \
+		sh configure; \
+	fi
+	@for i in $(SUBDIRS); do \
+		echo "build ==> $$i";\
+		cd $$i;\
+		${MAKE} build || exit; cd ..;\
+	done
+	@echo "To install type \"make install\" ."
+
+clean:
+	${RM} -f DEADJOE *~
+	@for i in $(CLEANDIRS); do \
+		echo "clean ==> $$i";\
+		cd $$i;\
+		${MAKE} clean; cd ..;\
+	done
+	-@if [ -f include/setup.h ] ; then \
+	echo "To really restart installation, make distclean" ; \
+	fi
+
+distclean: clean
+	${RM} -f Makefile *.rej *.orig core core.*
+	${RM} -f config.status config.cache config.log
+	cd include; ${RM} -f path.h setup.h *~ *.rej *.orig ; cd ..
+	@for i in $(CLEANDIRS); do \
+		echo "distclean ==> $$i";\
+		cd $$i;\
+		${MAKE} distclean; cd ..;\
+	done
+
+depend:
+	@for i in $(SUBDIRS); do \
+		echo "depend ==> $$i";\
+		cd $$i;\
+		${MAKE} depend; cd ..;\
+	done
+
+lint:
+	@for i in $(SUBDIRS); do \
+		echo "lint ==> $$i";\
+		cd $$i;\
+		${MAKE} lint; cd ..;\
+	done
+
+install: all
+	@for i in $(SUBDIRS); do \
+		echo "install ==> $$i";\
+		cd $$i;\
+		${MAKE} install; \
+		cd ..; \
+	done

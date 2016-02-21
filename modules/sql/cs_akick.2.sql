@@ -1,0 +1,4 @@
+# $Id: cs_akick.2.sql,v 1.1.1.1 2005/08/27 15:44:48 jpinto Exp $
+ALTER TABLE cs_akick ADD
+  CONSTRAINT FK_AK1 FOREIGN KEY (scid) REFERENCES chanserv (scid)
+    ON DELETE CASCADE ON UPDATE CASCADE;

@@ -1,0 +1,20 @@
+As of PTlink Services 3.5.0 the configuration was moved to the database .
+You can view/edit the configuration by using the ircsvs conf command.
+Change to the ircsvs bin dir...
+To get a list of configuration items type:
+  ./ircsvs conf list
+To edit an item:
+  ./ircsvs conf set item value
+For string values you must use "value"
+  ./ircsvs conf set item "value"
+For time items you must specify a number followed by a time char :
+  ./ircsvs conf set item value[mhdMY]
+There are some optional items which can be unset to disable some functions,
+for those items you can use:
+  ./ircsvs conf unset item
+If you want to edit the configuration from a text file and then apply it to
+the database you can do it by using the conf export command:
+  ./ircsvs conf export > fullconf.sh
+Later you can apply the config by executing the export file as a script:
+  sh fullconf.sh
+

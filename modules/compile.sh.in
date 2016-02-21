@@ -1,0 +1,14 @@
+#!/bin/sh
+if [ ! $# -eq 1 ]
+then
+  echo "Usage: $0 module.c"
+  exit
+fi
+output=`echo $1 | sed "s/\.c/\.so/g"`
+echo "Compiling module $1"
+CC=@CC@
+INCLUDES="-I../include -I../libdconf -I../libircservice/include"
+CFLAGS="@CFLAGS@ ${INCLUDES}"
+PICFLAGS="@PICFLAGS@"
+CPPFLAGS="@CPPFLAGS@"
+echo ${CC} ${PICFLAGS} ${CPPFLAGS} ${CFLAGS} $1 -o $output

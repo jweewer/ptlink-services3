@@ -1,0 +1,113 @@
+******************************************************************
+*                   http://software.pt-link.net                  *
+******************************************************************
+* $Id: CHANGES,v 1.11 2005/10/16 17:31:32 jpinto Exp $           *
+
+(0.6)
+
+  What is new ?
+  ---------------------
+  irc_IsValidNick() to validate a nickname
+  irc_IsValidHostname() to validate an hostname
+  irc_IsValidUsername() to validate an username
+  irc_ChgHost to change user's public hostname
+  irc_SetChanMlocker() to set channel mlock enforce user
+
+  What has been fixed ?
+  ---------------------
+  Task #34 : libircservice is not sending SVINFO/SVSINFO
+  irc_Kick witha NULL message crashing on FreeBSD
+  Local users are reintroduced on kills
+  Local user quits were not properly handled
+  We now check if duplicate nicks on local users creation
+  ApplyMlock uses a local user whenever possible
+
+(0.5) 07 Sep 2005
+
+  What is new ?
+  ---------------------
+  IRC_TimerStats() to send timer statistics
+  irc_GlobalMessage() to send a global message
+  irc_ChannelMLock() to set a channel mode lock
+  irc_UserMaskP() to return the user's public mask
+  irc_IsLocalUser() to check if its a local user
+  irc_DelUMsgEvent()
+  Channel timer events
+
+  What has been fixed ?
+  ---------------------
+  IRC_User now keeps the snid and the status/flags
+  ET_CHAN_TOPIC now sends the topic channel user
+  0000240: several commands matched with a single letter
+  0000217: PTlink Services 3 doesn't ignore the % halfop on nicks
+  irc_DelEvent with a wrong assert condition
+  0000216: unban is broken
+  added missing who paramenter on irc_Gline()
+  added missing handler for the m_kick message
+  irc_ChanPart paramentes were incorrect
+  local channel cmodes are are now properly set on netjoin
+  local user flag is now set on local users
+  user_count was renamed to users_count
+  irc_QuitLocalUser() memory leaks
+  ET_CHAN_PART was moved to del_user_from_chan
+  local users join generates the ET_CHANJOIN event
+
+(0.4) 15 Apr 2005
+
+  What is new ?
+  ---------------------
+  irc_AbortThisEvent() allows an event handle to cancel pending events
+  irc_CNameInvite() for channame based invite
+  irc_SetVersion() to set the server version string
+  irc_UserSMask() to return a short mask
+
+  What has been fixed ?
+  ---------------------
+  We now send the local users umodes
+  IRC_Server struct is now a clone of IRC_User and added to the user's hash
+  irc_UserMask() ! was swapped with @
+  mode change events after was beeing called before new user
+
+
+(0.3)
+  What is new ?
+  ---------------------
+  irc_ChanUnban() to unban an user from a channel
+  irc_Invite() to invite an user to a channel
+  irc_ChanONotice() to send channel op notices
+  irc_ChanTopic() to change a channel's topic
+  IRC_FindOnChan() to look for an user on a channel
+  added guest_counf field to count forced guest changes
+
+  What has been fixed ?
+  ---------------------
+  irc_CreateLocalUser() introduces user when connected to the ircd
+  chanmode +f is now properly parsed
+  a memory leak on del_user_from_chan()
+  samples are now build with the make rule "samples"
+  last_topic was not beeing strdupped as expected
+  cleaned up the umode.c and imode.c files for some missing 
+    or unused modes
+  
+(0.2) 19 Dec 2004
+
+  What is new ?
+  ---------------------
+  --enable-develop for developer compiler options
+  irc_SendRaw() to send raw messages
+  irc_ConnectionStatus() to check connection status
+  irc_ChanJoin() to make local user join a channel
+  irc_ChanPart() to make a local user part from a channel
+  irc_Kick() to kick a user from a channel
+  irc_UserMask() to return an user mask
+  irc_SendCNotice() to send a channel notice
+  irc_SendCMsg() to send a channel message
+  kick message handling
+  samples/changuard (shows irc_ChanJoin/irc_ChanPart usage)
+
+
+  we now make the samples on the default make rule
+  code cleanup on samples
+
+  libircservices0.1 - Initital release
+==================================================================

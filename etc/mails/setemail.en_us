@@ -1,0 +1,23 @@
+From: "%from_name%" <%from%>
+To: "%nick%" <%email%>
+Subject: Email change
+
+Hello %nick%,
+
+You are receiving this message as part of an automated email
+authentication system on the PTlink IRC network. If you did not request
+this service, you may simply ignore this message.
+
+Your new nick security code is: 
+  %securitycode%
+
+The next time you are online identify your nick with
+  /NickServ IDENTIFY password
+
+Authenticate your email address with:
+  /NickServ AUTH %securitycode%
+
+The PTlink IRC Network
+http://www.pt-link.net	
+/server irc.pt-link.net:6667
+

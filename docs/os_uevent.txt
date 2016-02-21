@@ -1,0 +1,44 @@
+
+/OperServ EVENT ADD [+time] ON_event(parameter) action [action_param]
+
+Event types:
+// User connecting with mask
+  ON_CONNECT mask
+// User identifying belongs to group
+  ON_GROUP group
+// User registering a nick
+  ON_NICK_REGISTER mask
+// User logging in a nick
+  ON_NICK_LOGIN mask
+// User registering a channel name matching mask
+  ON_CHAN_REGISTER mask
+// User joining a channel name matchng masking
+  ON_JOIN mask
+
+Action types:
+// Send message to user
+  MESSAGE message
+// Send notice to user
+  NOTICE notice
+// Gline user's hostname
+  GLINE time reason
+// Set umodes on user
+  UMODE umodes
+// Log user information appending prefixing with message
+  LOG message
+// Send globops with warning
+  WARNING message
+// Force user to join a channel
+  JOIN #chan
+  
+Examples:
+ /OperServ EVENT ADD ON_CONNECT MESSAGE This is a global message
+ /OperServ EVENT ADD ON_CONNECT(*.pt) MESSAGE Olá tuga !
+ /OperServ EVENT ADD ON_CONNECT(*!javauser@*) GLINE 1d Invalid username !
+ /OperServ EVENT ADD ON_CHAN_JOIN(*warez*) MESSAGE Warez is illegal !
+ /OperServ EVENT ADD ON_CHAN_JOIN(*worm*) LOG Joined worm channel
+ /OperServ EVENT ADD ON_GROUP(Opers) MESSAGE Don't forget to join the admin chan.
+ /OperServ EVENT ADD ON_LOGIN(*.br) JOIN #Brasil
+ /OperServ EVENT ADD ON_NICK_REGISTER MESSAGE Welcome to PTlink !
+
+ 

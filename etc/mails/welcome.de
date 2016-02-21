@@ -1,0 +1,39 @@
+From: "%from_name%" <%from%>
+To: "%nick%" <%email%>
+Subject: Welcome
+
+Hello %nick%,
+
+You are receiving this message as part of an automated nickname
+registration system on the PTlink IRC network. If you did not request
+this registration, you may simply ignore this message.
+
+************ YOUR REGISTRATION IS NOT YET COMPLETE **********************
+
+The steps below will allow you to finish your nick registration. 
+If you ignore this e-mail, you will not be able to send memos or register 
+new channels.
+
+The security code for your nick is: 
+  %securitycode%
+
+Please save it and keep it secret, it will be required to
+execute irreversible commands like drop, channel ownership
+transfer or nickname recovery in case of a lost or stolen password.
+
+To complete your nick registration use the follow command:
+  /NickServ AUTH %securitycode%
+
+Do not forget that on the future when you connect to our network
+you must identify your nick with:
+  /NickServ IDENTIFY password
+
+By using the PTlink IRC Network you agree to be bound by its Acceptable
+Use Policy. Please read it at: http://www.pt-link.net/aup/
+
+%linkexchange%
+
+The PTlink IRC Network
+http://www.pt-link.net
+/server irc.pt-link.net:6667
+For help join #PTlink

@@ -1,0 +1,18 @@
+# $Id: cs_ajoin.sql,v 1.3 2005/10/29 11:22:29 jpinto Exp $
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS cs_ajoin;
+CREATE TABLE cs_ajoin
+(
+  snid INT UNSIGNED NOT NULL,
+  scid INT UNSIGNED NOT NULL,
+  order_id INT(2) NOT NULL default '0',
+  PRIMARY KEY(snid, scid),
+  INDEX(scid),
+  CONSTRAINT FK_CSA1 FOREIGN KEY (snid) REFERENCES nickserv (snid)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT FK_CSA2 FOREIGN KEY (scid) REFERENCES chanserv (scid)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) Type = InnoDB;
+
+SET FOREIGN_KEY_CHECKS = 1;

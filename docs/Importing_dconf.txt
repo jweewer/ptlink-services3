@@ -1,0 +1,15 @@
+As of PTlink 3.5.0 the text based .dconf files were replaced with db stored
+settings.
+# To make sure the new required modules will be loaded on startup do:
+# rm ~/ircsvs/etc/ircsvs.modules before "make install"
+To import the settings from the .dconf files proceed as described:
+# Dump all the .dconf to a single file
+cat ~/ircsvs/etc/*.dconf > ~/full.dconf
+# Now run the imput script on it
+source_dir/utils/import_dconf.sh ~/full.dconf > ~/dconf.sh
+cd ~/ircsvs/bin
+sh ~/dconf.sh
+# Cleanup the tmp files, they have the mysql db passwords
+rm ~/full.dconf ~/tmp/dconf.sh
+# Please note that you must manually configure the NickSecurityCode option
+# because its function was inverted.

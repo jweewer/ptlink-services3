@@ -1,0 +1,137 @@
+#**********************************************************************
+#* PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2005 *
+#*                  http://software.pt-link.net                       *
+#* This program is distributed under GNU Public License               *
+#* Please read the file COPYING for copyright information.            *
+#**********************************************************************
+#
+#  Description: PTlink IRC Services src Makefile.in
+#
+#  $Id: Makefile.in,v 1.4 2005/10/31 21:29:16 jpinto Exp $
+#
+
+CC		= @CC@
+INSTALL		= @INSTALL@
+INSTALL_BIN	= @INSTALL_PROGRAM@
+INSTALL_DATA	= @INSTALL_DATA@
+INSTALL_SUID	= @INSTALL_PROGRAM@ -o root -m 4755
+RM		= @RM@
+CFLAGS		= @CFLAGS@
+LDFLAGS   	= @LDFLAGS@
+MKDEP		= @MKDEP@
+MV		= @MV@
+RM		= @RM@
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+bindir		= @bindir@
+libexecdir	= @libexecdir@
+sysconfdir	= @sysconfdir@
+localstatedir	= @localstatedir@
+
+DOLLAR = $$
+
+SERVICES_EXE	= ircsvs
+
+PROGS		= $(SERVICES_EXE) 
+
+SVSLIBS	= @MODULES_LIBS@ -L../libircservice/src -lircservice @LIBS@
+
+INCLUDES	= -I../include -I ../libircservice/include
+
+CPPFLAGS	= ${INCLUDES} @CPPFLAGS@
+ 
+default:	all
+
+.depend:
+	@touch .depend
+
+l2lh: l2lh.c
+	${CC} ${CPPFLAGS} ${CFLAGS} l2lh.c -o $@
+BASE_SRCS =		\
+	array.c		\
+	encrypt.c	\
+	ircsvs.c	\
+	lang.c		\
+	log.c		\
+	match.c		\
+	modevents.c	\
+	modules.c	\
+	s_log.c		\
+	strhand.c	\
+	suser.c
+
+MYSQL_DEP_SRCS =	\
+	chanrecord.c	\
+	mysql.c		\
+	sqlb.c
+	
+SRCS = 	${BASE_SRCS}	\
+	@MYSQL_DEPENDENT@
+
+OBJS = ${SRCS:.c=.o}
+
+all: l2lh ${PROGS}
+
+build: all
+
+ircsvs: $(OBJS) ../libircservice/src/libircservice.a
+	${CC} ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS} ${SVSLIBS}
+
+install-mkdirs:
+	-@if test ! -d $(prefix); then \
+		echo "mkdir $(prefix)"; \
+		mkdir $(prefix); \
+	fi
+	-@if test ! -d $(exec_prefix); then \
+		echo "mkdir $(exec_prefix)"; \
+		mkdir $(exec_prefix); \
+	fi
+	-@if test ! -d $(bindir); then \
+		echo "mkdir $(bindir)"; \
+		mkdir $(bindir); \
+	fi
+	-@if test ! -d $(sysconfdir); then \
+		echo "mkdir $(sysconfdir)"; \
+		mkdir $(sysconfdir); \
+	fi
+	-@if test ! -d $(localstatedir)/var; then \
+		echo "mkdir $(localstatedir)/var"; \
+		mkdir $(localstatedir)/var; \
+	fi
+	-@if test ! -d $(localstatedir)/var/log; then \
+		echo "mkdir $(localstatedir)/log"; \
+		mkdir $(localstatedir)/var/log; \
+	fi
+	-@if test ! -d $(localstatedir)/var/run; then \
+		echo "mkdir $(localstatedir)/var/run"; \
+		mkdir $(localstatedir)/var/run; \
+	fi
+
+install: install-mkdirs build
+	@for i in $(PROGS); do \
+		if test -f $(bindir)/$$i; then \
+			echo $(MV) $(bindir)/$$i $(bindir)/$$i.old; \
+			$(MV) $(bindir)/$$i $(bindir)/$$i.old; \
+		fi; \
+		echo $(INSTALL_BIN) $$i $(bindir); \
+		$(INSTALL_BIN) $$i $(bindir); \
+	done
+
+# this is really the default rule for c files
+.c.o:
+	${CC} ${CPPFLAGS} ${CFLAGS} -c $<
+
+.PHONY: depend clean distclean
+depend:
+	${MKDEP} ${CPPFLAGS} ${BASE_SRCS} ${EXTRA_SRCS} > .depend
+
+lint:
+	lint -aacgprxhH $(CPPFLAGS) $(SRCS) >>../lint.out
+
+clean:
+	${RM} -f *.o *.exe *~ core.* l2lh ${PROGS}
+
+distclean: clean
+	${RM} -f Makefile .depend
+
+include .depend

@@ -1,0 +1,98 @@
+#**********************************************************************
+#* PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2004 *
+#*                  http://software.pt-link.net                       *
+#* This program is distributed under GNU Public License               *
+#* Please read the file COPYING for copyright information.            *
+#**********************************************************************
+#
+#  Description: PTlink IRC Services modules/sql Makefile.in
+#
+#  $Id: Makefile.in,v 1.13 2005/10/27 22:27:02 jpinto Exp $
+#
+
+prefix          = @prefix@
+sqldir		= @prefix@/var/modules/sql
+sysconfdir	= @sysconfdir@
+INSTALL         = @INSTALL@
+INSTALL_DATA    = @INSTALL_DATA@
+RM		= @RM@
+
+SQLS		= \
+		botserv.sql \
+		bs_chan.sql \
+		chanserv.sql \
+		chanserv.2.sql \
+		chanserv.3.sql \
+		chanserv.4.sql \
+		cs_ajoin.sql \
+		cs_ajoin.2.sql \
+		cs_akick.sql \
+		cs_akick.2.sql \
+		cs_role.sql \
+		cs_role.2.sql \
+		cs_role.3.sql \
+		dbconf.sql \
+		mysql.sql \
+		memoserv.sql \
+		memoserv.2.sql \
+		memoserv.3.sql \
+		memoserv.4.sql \
+		ns_last.sql \
+		ns_blist.sql \
+		ns_group.sql \
+		ns_group.2.sql \
+		ns_group.3.sql \
+		ns_photo.sql \
+		ns_photo.2.sql \
+		nickserv.sql \
+		nickserv.2.sql \
+		nickserv.3.sql \
+		nickserv.4.sql \
+		nickserv.5.sql \
+		nickserv.6.sql \
+		nickserv.7.sql \
+		nickserv.8.sql \
+		nickserv.9.sql \
+		os_quote.sql \
+		os_sline.sql \
+		os_sline.2.sql \
+		os_sysstats.sql \
+		os_uevent.sql \
+		recordstats.sql \
+		sessionlimit.sql
+
+build:
+	@echo Nothing to build on sql
+
+install: install-mkdirs
+	@echo "Installing sql files into $(sqldir)"
+	@for i in $(SQLS); do \
+		$(INSTALL_DATA) $$i $(sqldir); \
+        done
+
+install-mkdirs:
+	-@if test ! -d $(prefix); then \
+                echo "mkdir $(prefix)"; \
+                mkdir $(prefix); \
+        fi
+	
+	-@if test ! -d $(prefix)/var; then \
+                echo "mkdir $(prefix)/var"; \
+                mkdir $(prefix)/var; \
+        fi
+
+	-@if test ! -d $(prefix)/var/modules; then \
+                echo "mkdir $(prefix)/var/modules"; \
+                mkdir $(prefix)/var/modules; \
+        fi
+
+	-@if test ! -d $(sqldir); then \
+                echo "mkdir $(sqldir)"; \
+                mkdir $(sqldir); \
+        fi
+
+clean:
+	${RM} -f *.o *.exe *~ core.* ${PROG}
+
+distclean: clean
+	${RM} -f Makefile

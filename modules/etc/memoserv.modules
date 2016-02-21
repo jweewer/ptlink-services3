@@ -1,0 +1,10 @@
+# Default memoserv.modules
+ms_cancel
+ms_del
+ms_help
+ms_info
+ms_list
+ms_read
+ms_save
+ms_send
+ms_set

@@ -1,0 +1,24 @@
+# Default ircsvs.modules file
+
+# Don't chante these 4, they are core modules
+mysql
+dbconf
+email
+irc
+
+# Services
+nickserv
+chanserv
+operserv
+memoserv
+botserv
+
+# Log nickserv and chanserv dialy records changes (new/expired)
+recordstats
+
+# This module will trigger the data expiration routines
+# Commenting it will disable all data expiration
+expire
+
+# Logs global user's connects/quits to text files
+userlog

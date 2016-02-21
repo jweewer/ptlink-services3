@@ -1,0 +1,22 @@
+From: "%from_name%" <%from%>
+To: "%nick%" <%email%>
+Subject: Alteração de email
+
+Olá %nick%,
+
+Estás a receber esta mensagem de forma a completar o registo de um nick 
+na rede PTlink. 
+Se o registo não foi pedido por ti ignora esta mensagem.
+
+O código de segurança para o teu nick é: 
+  %securitycode%
+
+A próxima vez que te ligares identifica-te com:
+  /NickServ IDENTIFY password
+
+E em seguida autentica o teu email com:
+  /NickServ AUTH %securitycode%
+
+A rede de IRC PTlink
+http://www.pt-link.net	
+/server irc.pt-link.net:6667

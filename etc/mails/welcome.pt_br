@@ -1,0 +1,37 @@
+From: "%from_name%" <%from%>
+To: "%nick%" <%email%>
+Subject: Bem Vindo
+
+Olá %nick%,
+
+Estás a receber esta mensagem de forma a completar o registo de um nick
+na rede PTlink.
+Se o registo não foi pedido por ti ignora esta mensagem.
+
+*********** O Registo do teu nick ainda não está completo  ***********
+
+Deves seguir as instruções que se seguem caso contrário não poderás
+enviar memos ou registar canais.
+
+O código de segurança para o teu nick é:
+  %securitycode%
+
+Guarda este código de forma confidencial, será necessário caso pretendas 
+executar comandos irreversíveis como cancelar registros, transferir canais 
+para outros nick ou ainda recuperar a tua password.
+
+Para completares o registo valida o teu endereço de email com o comando:
+  /NickServ AUTH %securitycode%
+
+Não te esqueças que sempre que te ligares na PTlink terás que identificar
+o teu nick com o comando:
+  /NickServ IDENTIFY password
+
+Ao utilizares a rede de IRC PTlink estás obrigado a cumprir a nossa política
+de utilização aceitável que podes ler em: http://www.pt-link.net/aup/
+
+%linkexchange%
+
+A rede de IRC PTlink
+http://www.pt-link.net	
+/server irc.pt-link.net:6667

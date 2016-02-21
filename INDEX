@@ -1,0 +1,27 @@
+**********************************************************************
+* PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2005 *
+*                     http://software.pt-link.net                    *
+* This program is distributed under GNU Public License               *
+* Please read the file COPYING for copyright information.            *
+**********************************************************************  
+
+  Description: INDEX file
+
+ *  $Id: INDEX,v 1.1.1.1 2005/08/27 15:43:09 jpinto Exp $
+
+Directory               | Contents
+------------------------|--------------------------
+autoconf/		| autoconf aux files
+docs/			| documentation
+etc/			| default configuration files
+libdconf/   		| dconf library
+include/  		| include files
+src/	  		| irc services core source
+libircservice/  	| auxiliar library
+modules/     		| modules
+modules/lang/		| lang files
+modules/sql/		| modules sql files
+modules/etc/		| modules configuration files
+www/			| web interface for services
+
+ *  $Id: INDEX,v 1.1.1.1 2005/08/27 15:43:09 jpinto Exp $

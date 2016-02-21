@@ -1,0 +1,313 @@
+#**********************************************************************
+#* PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2004 *
+#*                  http://software.pt-link.net                       *
+#* This program is distributed under GNU Public License               *
+#* Please read the file COPYING for copyright information.            *
+#**********************************************************************
+#
+#  Description: PTlink IRC Services modules Makefile.in
+#
+#  $Id: Makefile.in,v 1.19 2005/10/22 11:01:33 jpinto Exp $
+#
+
+CC		= @CC@
+AR		= @AR@
+RANLIB		= @RANLIB@
+RM		= @RM@
+SED             = @SED@
+LEX		= @LEX@
+LEXLIB		= @LEXLIB@
+CFLAGS		= @CFLAGS@
+PICFLAGS	= @PICFLAGS@
+MKDEP		= @MKDEP@ 
+INSTALL		= @INSTALL@
+INSTALL_PROGRAM	= @INSTALL_PROGRAM@
+INSTALL_DATA	= @INSTALL_DATA@
+INSTALL_SUID    = @INSTALL_PROGRAM@ -o root -m 4755
+SEDOBJ		= @SEDOBJ@
+SHELL		= /bin/sh
+MV		= @MV@
+LD		= @LD@
+
+SVSLIBS        	= @LIBS@ $(SSL_LIBS)
+CLEANDIRS	= etc sql
+
+prefix          = @prefix@
+moduledir       = @prefix@/bin/modules
+
+INCLUDES	= -I../include -I../libdconf -I../libircservice/include
+CPPFLAGS	= ${INCLUDES} @CPPFLAGS@
+
+# Web dependent sources
+WEB_DEP_SRCS = 
+#	webstats.c
+# MySQL dependent sources
+MYSQL_DEP_SRCS = \
+	botserv.c \
+	bs_assign.c \
+	bs_create.c \
+	bs_drop.c \
+	bs_help.c \
+	bs_info.c \
+	bs_list.c \
+	chanserv.c \
+	dbconf.c \
+	email.c \
+	memoserv.c \
+	ms_cancel.c \
+	ms_del.c \
+	ms_info.c \
+	ms_list.c \
+	ms_read.c \
+	ms_save.c \
+	ms_send.c \
+	ms_set.c \
+	cs_ajoin.c \
+	cs_akick.c \
+	cs_clear.c \
+	cs_drop.c \
+	cs_help.c \
+	cs_hopdehop.c \
+	cs_info.c \
+	cs_invite.c \
+	cs_kick.c \
+	cs_lastreg.c \
+	cs_list.c \
+	cs_opdeop.c \
+	cs_register.c \
+	cs_role.c \
+	cs_set.c \
+	cs_show.c \
+	cs_suspend.c \
+	cs_voicedevoice.c \
+	cs_unban.c \
+	expire.c \
+	irc.c \
+	joomla_export.c \
+	mysql.c \
+	ms_help.c \
+	nickserv.c \
+	ns_auth.c \
+	ns_blist.c \
+	ns_drop.c \
+	ns_getpass.c \
+	ns_group.c \
+	ns_help.c \
+	ns_identify.c \
+	ns_info.c \
+	ns_last.c \
+	ns_list.c \
+	ns_login.c \
+	ns_photo.c \
+	ns_register.c \
+	ns_set.c \
+	ns_suspend.c \
+	operserv.c \
+	os_global.c \
+	os_help.c \
+	os_kick.c \
+	os_mode.c \
+	os_module.c \
+	os_quote.c \
+	os_raw.c \
+	os_sendpass.c \
+	os_shutdown.c \
+	os_sline.c \
+	os_stats.c \
+	os_sysstats.c \
+	os_sysuptime.c \
+	os_uevent.c \
+	recordstats.c \
+	sessionlimit.c
+
+SRCS =	template.c \
+	userlog.c \
+	@WEB_DEPENDENT@ \
+	@MYSQL_DEPENDENT@
+
+ALL_SRCS = $(SRCS)
+
+L_SRCS = \
+	lang/bs_assign.l \
+	lang/bs_create.l \
+	lang/bs_drop.l \
+	lang/bs_info.l \
+	lang/bs_list.l \
+	lang/chanserv.l \
+	lang/common.l \
+	lang/cs_ajoin.l \
+	lang/cs_akick.l \
+	lang/cs_clear.l \
+	lang/cs_drop.l \
+	lang/cs_hopdehop.l \
+	lang/cs_info.l \
+	lang/cs_invite.l \
+	lang/cs_kick.l \
+	lang/cs_lastreg.l \
+	lang/cs_list.l \
+	lang/cs_opdeop.l \
+	lang/cs_register.l \
+	lang/cs_role.l \
+	lang/cs_set.l \
+	lang/cs_show.l \
+	lang/cs_suspend.l \
+	lang/cscommon.l \
+	lang/cs_voicedevoice.l \
+	lang/cs_unban.l \
+	lang/help.l \
+	lang/memoserv.l \
+	lang/ms_cancel.l \
+	lang/ms_del.l \
+	lang/ms_info.l \
+	lang/ms_list.l \
+	lang/ms_read.l \
+	lang/ms_save.l \
+	lang/ms_send.l \
+	lang/ms_set.l \
+	lang/nickserv.l \
+	lang/ns_auth.l \
+	lang/ns_blist.l \
+	lang/ns_drop.l \
+	lang/ns_getpass.l \
+	lang/ns_group.l \
+	lang/ns_identify.l \
+	lang/ns_info.l \
+	lang/ns_last.l \
+	lang/ns_list.l \
+	lang/ns_login.l \
+	lang/ns_photo.l \
+	lang/ns_register.l \
+	lang/ns_set.l \
+	lang/ns_suspend.l \
+	lang/nscommon.l \
+	lang/operserv.l \
+	lang/os_global.l \
+	lang/os_kick.l \
+	lang/os_mode.l \
+	lang/os_module.l \
+	lang/os_quote.l \
+	lang/os_raw.l \
+	lang/os_sendpass.l \
+	lang/os_shutdown.l \
+	lang/os_sline.l \
+	lang/os_stats.l \
+	lang/os_sysuptime.l \
+	lang/os_uevent.l \
+	lang/sessionlimit.l
+
+SH_OBJS = ${SRCS:.c=.so}
+SH_CORE_OBJS = ${CORE_SRCS:.c=.so}
+
+
+HPUX_OBJS = ${SH_OBJS:.so=.sl}
+HPUX_CORE_OBJS = ${SH_CORE_OBJS:.so=.sl}
+
+S_OBJS = ${ALL_SRCS:.c=.o}
+L_OBJS = ${L_SRCS:.l=.lh}
+
+DOLLAR = $$
+
+.depend:
+	@touch .depend
+
+default:	build
+build: lang all
+all: @MOD_TARGET@
+
+shared_modules: $(SH_CORE_OBJS) $(SH_OBJS)
+
+hpux_modules: $(HPUX_CORE_OBJS) $(HPUX_OBJS)
+
+hpux_shared: $(SH_CORE_OBJS) $(SH_OBJS)
+	${MAKE} hpux_modules
+
+lang: $(L_OBJS)
+
+libmodules.a: $(S_OBJS)
+	$(RM) -f $@
+	$(AR) cqv $@ $(S_OBJS) 
+	$(RANLIB) $@
+
+install-mkdirs:
+	-@if test ! -d $(prefix); then \
+                echo "mkdir $(prefix)"; \
+                mkdir $(prefix); \
+        fi
+	
+	-@if test -d $(moduledir)-old; then \
+		echo "rm -rf $(moduledir)-old"; \
+		rm -rf $(moduledir)-old; \
+	fi
+	-@if test -d $(moduledir); then \
+		echo "mv $(moduledir) $(moduledir)-old"; \
+		mv $(moduledir) $(moduledir)-old; \
+	fi
+
+	-@if test ! -d $(moduledir); then \
+                echo "mkdir $(moduledir)"; \
+                mkdir $(moduledir); \
+        fi
+
+install: install_@MOD_TARGET@
+
+install_libmodules.a: libmodules.a
+# Ye olde noop here.	
+
+install_shared_modules: install-mkdirs
+	@echo "Installing modules into $(moduledir) .."
+	@for file in $(SH_OBJS); do \
+		$(INSTALL_DATA) $$file $(moduledir); \
+	done
+	@echo "Installing sql files"
+	@cd sql; ${MAKE} install ; cd ..
+	@echo "Installing example .dconf and .modules files if required"
+	@cd etc; ${MAKE} install ; cd ..
+
+install_hpux_shared: install-mkdirs
+	@echo "Installing modules into $(moduledir) .."
+	@for file in $(HPUX_CORE_OBJS); do \
+		$(INSTALL_DATA) $$file $(moduledir); \
+	done
+	@echo "Installing modules into $(automoduledir) .."
+	@for file in $(HPUX_OBJS); do \
+		$(INSTALL_DATA) $$file $(automoduledir); \
+	done
+
+.SUFFIXES: .sl .so .o .lh
+
+.c.o:
+	${CC} ${CPPFLAGS} ${CFLAGS} -c $< -o $@
+
+.c.so:
+	${CC} ${PICFLAGS} ${CPPFLAGS} ${CFLAGS} $< -o $@
+
+.so.sl:
+	$(LD) -b $< -o $@
+
+.l.lh:
+	@../src/l2lh $<
+
+.PHONY: depend clean distclean
+depend:
+	${MKDEP} ${CPPFLAGS} ${ALL_SRCS} > .depend.o
+	cat .depend.o | sed "s/\.o/\.so/g" > .depend
+
+clean:
+	${RM} -f ircsvs *.so *.sl *~ *.o *.a DEADJOE
+	${RM} -f lang/*.lh lang/*~
+	@cd sql; ${MAKE} clean ; cd ..
+	@cd etc; ${MAKE} clean ; cd ..
+
+lint:
+	lint -aacgprxhH ${CPPFLAGS} $(ALL_SRCS) >../lint.out
+
+distclean: clean compile.sh
+	echo > .depend
+	${RM} -f Makefile .depend
+	@for i in $(CLEANDIRS); do \
+		echo "distclean ==> $$i";\
+		cd $$i;\
+		${MAKE} distclean; cd ..;\
+	done
+
+include .depend

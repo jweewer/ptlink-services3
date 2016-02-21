@@ -1,0 +1,26 @@
+**********************************************************************
+* PTlink IRC Services is (C) CopyRight PTlink IRC Software 1999-2005 *
+*                     http://software.pt-link.net                    *
+* This program is distributed under GNU Public License               *
+* Please read the file COPYING for copyright information.            *
+**********************************************************************
+
+  Description: Upgrading how-to
+
+  $Id: Upgrades.txt,v 1.1.1.1 2005/08/27 15:43:50 jpinto Exp $
+
+A few things you should take care when upgrading PTlink IRC Services:
+
+Before upgrading ALWAYS do a full backup of your MySQL db (e.g. using
+mysqldump) .
+
+Shutdown your services . If you have the webservices interface, disable it.
+
+You don't need to apply any changes manually, just compile and install
+services as for a fresh install.
+The configure script will notify you about dconf changes that you may need
+to review.
+During the inital run of the newer version the modules will update their
+tables if required.
+
+If you find a problem during the upgrade visit our web page.
